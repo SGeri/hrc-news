@@ -30,11 +30,11 @@ export default function App() {
     return <ActivityIndicator />;
   }
 
+  // Comment out WelcomeStack to disable welcome screen
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {//<Stack.Screen name="Welcome" component={WelcomeStackScreens} />
-        }
+        <Stack.Screen name="Welcome" component={WelcomeStackScreens} />
         <Stack.Screen name="Tabs" component={TabsNavigator} />
       </Stack.Navigator>
     </NavigationContainer>

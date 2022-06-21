@@ -1,5 +1,4 @@
 import {
-  SafeAreaView,
   Text,
   StyleSheet,
   View,
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
 
 export default function Page({ navigation }) {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Útmutató</Text>
       <Text style={styles.description}>
         Ha szeretnél többet megtudni az alkalmazásról és a HRC News
@@ -104,7 +103,7 @@ export default function Page({ navigation }) {
       />
 
       <Separator />
-    </SafeAreaView>
+    </View>
   );
 }
 

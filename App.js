@@ -33,7 +33,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Welcome" component={WelcomeStackScreens} />
+        {//<Stack.Screen name="Welcome" component={WelcomeStackScreens} />
+        }
         <Stack.Screen name="Tabs" component={TabsNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
@@ -45,6 +46,7 @@ function TabsNavigator() {
     <Tabs.Navigator
       screenOptions={{
         headerShown: true,
+        headerTitleAlign: "left",
         headerTitle: () => <HeaderTitle />,
         headerRight: () => <HeaderRight />,
 

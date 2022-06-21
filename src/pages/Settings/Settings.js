@@ -1,5 +1,4 @@
 import {
-  SafeAreaView,
   Text,
   StyleSheet,
   View,
@@ -100,7 +99,7 @@ const styles = StyleSheet.create({
 
 export default function Page({ navigation }) {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Beállítások</Text>
 
       <Category
@@ -158,7 +157,7 @@ export default function Page({ navigation }) {
           <Text style={styles.copyrightText}>Minden jog fenntartva.</Text>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 

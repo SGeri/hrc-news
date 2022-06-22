@@ -1,5 +1,12 @@
-import { SafeAreaView, View, Text, Image, StyleSheet } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Alert,
+} from "react-native";
 
 import Button from "../../components/Button/Button";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
@@ -43,9 +50,23 @@ const styles = StyleSheet.create({
 });
 
 export default function Page({ navigation }) {
+  const [TOU, setTOU] = useState(false);
+  const [TOS, setTOS] = useState(false);
+  const [TOP, setTOP] = useState(false);
+
+  const next = () => {
+    if (TOU && TOS && TOP) {
+      navigation.navigate("WelcomeStep7");
+    } else {
+      Alert.alert(
+        "Fontos dokumentumok",
+        "Kérjük, fogadd el az összes dokumentumot!"
+      );
+    }
+  };
+
   return (
     <>
-      <StatusBar hidden />
       <ProgressBar progress={(100 / 7) * 6} />
 
       <SafeAreaView style={styles.container}>
@@ -58,37 +79,32 @@ export default function Page({ navigation }) {
           </Text>
 
           <Checkbox
-            text="Service Status értesítések"
-            checked={true}
-            onPress={() => {}}
+            text="Használati Feltételeink"
+            checked={TOU}
+            onPress={() => setTOU(!TOU)}
           />
 
           <Separator />
 
           <Checkbox
-            text="GTA Online értesítések"
-            checked={true}
-            onPress={() => {}}
+            text="Szolgáltatási Feltételeink"
+            checked={TOS}
+            onPress={() => setTOS(!TOS)}
           />
 
           <Separator />
 
           <Checkbox
-            text="Red Dead Online értesítések"
-            checked={true}
-            onPress={() => {}}
+            text="Adatkezelési Tájékoztatónk"
+            checked={TOP}
+            onPress={() => setTOP(!TOP)}
           />
 
           <Separator />
 
           <View style={{ marginBottom: 50 }} />
 
-          <Button
-            text="Tovább"
-            width={100}
-            height={40}
-            onPress={() => navigation.navigate("WelcomeStep7")}
-          />
+          <Button text="Tovább" width={100} height={40} onPress={next} />
         </View>
 
         <Image style={styles.image} source={Welcome6Image} />

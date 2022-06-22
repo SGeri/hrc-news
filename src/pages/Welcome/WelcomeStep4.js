@@ -1,5 +1,5 @@
-import { SafeAreaView, View, Text, Image, StyleSheet } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import { SafeAreaView, View, Text, StyleSheet } from "react-native";
 
 import Button from "../../components/Button/Button";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
@@ -44,9 +44,31 @@ const styles = StyleSheet.create({
 });
 
 export default function Page({ navigation }) {
+  const [notifications, setNotifications] = useState([
+    "status",
+    "gtao",
+    "rdo",
+    "gtavi",
+    "gtat",
+    "rockstar",
+    "taketwo",
+    "huroc",
+  ]);
+
+  const toggleNotification = (notification) => {
+    if (notifications.includes(notification)) {
+      setNotifications(notifications.filter((n) => n !== notification));
+    } else {
+      setNotifications([...notifications, notification]);
+    }
+  };
+
+  const isNotificationChecked = (notification) => {
+    return notifications.includes(notification);
+  };
+
   return (
     <>
-      <StatusBar hidden />
       <ProgressBar progress={(100 / 7) * 4} />
 
       <SafeAreaView style={styles.container}>
@@ -58,64 +80,64 @@ export default function Page({ navigation }) {
 
         <Checkbox
           text="Service Status értesítések"
-          checked={true}
-          onPress={() => {}}
+          checked={isNotificationChecked("status")}
+          onPress={() => toggleNotification("status")}
         />
 
         <Separator />
 
         <Checkbox
           text="GTA Online értesítések"
-          checked={true}
-          onPress={() => {}}
+          checked={isNotificationChecked("gtao")}
+          onPress={() => toggleNotification("gtao")}
         />
 
         <Separator />
 
         <Checkbox
           text="Red Dead Online értesítések"
-          checked={true}
-          onPress={() => {}}
+          checked={isNotificationChecked("rdo")}
+          onPress={() => toggleNotification("rdo")}
         />
 
         <Separator />
 
         <Checkbox
           text="Grand Theft Auto VI értesítések"
-          checked={true}
-          onPress={() => {}}
+          checked={isNotificationChecked("gtavi")}
+          onPress={() => toggleNotification("gtavi")}
         />
 
         <Separator />
 
         <Checkbox
           text="GTA: The Triology értesítések"
-          checked={true}
-          onPress={() => {}}
+          checked={isNotificationChecked("gtat")}
+          onPress={() => toggleNotification("gtat")}
         />
 
         <Separator />
 
         <Checkbox
           text="Rockstar Games értesítések"
-          checked={true}
-          onPress={() => {}}
+          checked={isNotificationChecked("rockstar")}
+          onPress={() => toggleNotification("rockstar")}
         />
 
         <Separator />
 
         <Checkbox
           text="Take-Two Interactive értesítések"
-          checked={true}
-          onPress={() => {}}
+          checked={isNotificationChecked("taketwo")}
+          onPress={() => toggleNotification("taketwo")}
         />
 
         <Separator />
 
         <Checkbox
           text="Hungarian Rockstar Club értesítések"
-          checked={true}
-          onPress={() => {}}
+          checked={isNotificationChecked("huroc")}
+          onPress={() => toggleNotification("huroc")}
         />
 
         <Separator />

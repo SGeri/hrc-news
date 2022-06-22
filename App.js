@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ActivityIndicator } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -25,16 +27,29 @@ export default function App() {
     NotoSansRegular: require("./src/fonts/NotoSansRegular.ttf"),
     NotoSansBold: require("./src/fonts/NotoSansBold.ttf"),
   });
+  const [firstLaunch, setFirstLaunch] = useState(true);
 
   if (!fontsLoaded) {
     return <ActivityIndicator />;
+  }
+
+  try {
+    const launchStorageValue = AsyncStorage.getItem("@first_launch");
+
+    if (launchStorageValue === "false") {
+      setFirstLaunch(false);
+    }
+  } catch (e) {
+    setFirstLaunch(false);
   }
 
   // Comment out WelcomeStack to disable welcome screen
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Welcome" component={WelcomeStackScreens} />
+        {firstLaunch && (
+          <Stack.Screen name="Welcome" component={WelcomeStackScreens} />
+        )}
         <Stack.Screen name="Tabs" component={TabsNavigator} />
       </Stack.Navigator>
     </NavigationContainer>

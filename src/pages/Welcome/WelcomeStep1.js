@@ -1,5 +1,4 @@
 import { SafeAreaView, View, Text, Image, StyleSheet } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 import Button from "../../components/Button/Button";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
@@ -44,7 +43,6 @@ const styles = StyleSheet.create({
 export default function Page({ navigation }) {
   return (
     <>
-      <StatusBar hidden />
       <ProgressBar progress={100 / 7} />
 
       <SafeAreaView style={styles.container}>

@@ -1,5 +1,5 @@
 import { SafeAreaView, View, Text, Image, StyleSheet } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Button from "../../components/Button/Button";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
@@ -42,9 +42,18 @@ const styles = StyleSheet.create({
 });
 
 export default function Page({ navigation }) {
+  const exitWelcome = async () => {
+    try {
+      await AsyncStorage.setItem("@first_launch", "false");
+    } catch (e) {
+      alert("Nem sikerült elmenteni az adatokat a háttértárba!");
+    }
+
+    navigation.replace("Tabs", { screen: "News" });
+  };
+
   return (
     <>
-      <StatusBar hidden />
       <ProgressBar progress={100} />
 
       <SafeAreaView style={styles.container}>
@@ -58,7 +67,7 @@ export default function Page({ navigation }) {
             text="Indítás"
             width={100}
             height={40}
-            onPress={() => navigation.navigate("Tabs", { screen: "Status" })}
+            onPress={exitWelcome}
           />
         </View>
 

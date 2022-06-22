@@ -5,6 +5,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import OneSignal from "react-native-onesignal";
+import Constants from "expo-constants";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -19,6 +21,8 @@ import HeaderRight from "./src/components/Header/HeaderRight";
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
+
+OneSignal.setAppId(Constants.manifest.extra.oneSignalAppId);
 
 export default function App() {
   const [fontsLoaded] = useFonts({
